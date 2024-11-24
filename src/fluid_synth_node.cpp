@@ -388,6 +388,8 @@ int FluidSynthNode::settings_load(String file_name)
             continue;
         }
     }
+    save_file->close();
+    save_file->unreference();
     return 0;
 }
 
