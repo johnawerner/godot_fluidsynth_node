@@ -297,7 +297,6 @@ int FluidSynthNode::settings_save(String file_name)
         Ref<FileAccess> save_file = FileAccess::open("user://" + file_name, FileAccess::ModeFlags::WRITE);
         save_file->store_line(json);
         save_file->close();
-        save_file->unreference();
     }
     else
     {
@@ -319,17 +318,13 @@ int FluidSynthNode::settings_load_from_json(String json_str)
         }
     }
 
-    JSON json = JSON();
-    Error parseResult = json.parse(json_str);
-    if (parseResult != Error::OK)
+
+    Dictionary nodeData = JSON::parse_string(json_str);
+    if (!nodeData)
     {
-        WARN_PRINT_ED(vformat("JSON Parse Error: %s in %s at line %d",
-            json.get_error_message(), json_str, json.get_error_line()));
+        WARN_PRINT_ED("FluidSynth Could not parse settings file");
         return -1;
     }
-
-    // Get the data from the JSON object.
-    Dictionary nodeData = Dictionary((Dictionary)json.get_data());
 
     // Now we set the remaining variables.
     Array keys = nodeData.keys();
@@ -389,7 +384,6 @@ int FluidSynthNode::settings_load(String file_name)
         }
     }
     save_file->close();
-    save_file->unreference();
     return 0;
 }
 
