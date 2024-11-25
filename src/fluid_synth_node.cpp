@@ -373,17 +373,25 @@ int FluidSynthNode::settings_load(String file_name)
     // it represents.
     Ref<FileAccess> save_file = FileAccess::open("user://" + file_name, FileAccess::ModeFlags::READ);
 
-    while (save_file->get_position() < save_file->get_length())
+    if (save_file != NULL)
     {
-        String jsonString = save_file->get_line();
-
-        if (settings_load_from_json(jsonString) == -1)
+        while (save_file->get_position() < save_file->get_length())
         {
-            WARN_PRINT_ED("FluidSynth Failed to load settings from JSON");
-            continue;
+            String jsonString = save_file->get_line();
+
+            if (settings_load_from_json(jsonString) == -1)
+            {
+                WARN_PRINT_ED("FluidSynth Failed to load settings from JSON");
+                continue;
+            }
         }
+        save_file->close();
     }
-    save_file->close();
+    else
+    {
+        WARN_PRINT_ED(vformat("FluidSynth Could not open settings file, although existence check was true: %s", file_name));
+        return -1;
+    }
     return 0;
 }
 
