@@ -41,6 +41,7 @@ void FluidSynthNode::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("synth_soundfont_next_preset", "sfont_id"), &FluidSynthNode::synth_soundfont_next_preset);
 	ClassDB::bind_method(D_METHOD("synth_play_messages", "indices", "data"), &FluidSynthNode::synth_play_messages);
 	ClassDB::bind_method(D_METHOD("synth_system_reset"), &FluidSynthNode::synth_system_reset);
+	ClassDB::bind_method(D_METHOD("synth_listen_ext_input", "listen"), &FluidSynthNode::synth_listen_ext_input);
 
     // Player methods
 	ClassDB::bind_method(D_METHOD("player_create"), &FluidSynthNode::player_create);

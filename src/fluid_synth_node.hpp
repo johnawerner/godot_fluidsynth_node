@@ -136,6 +136,7 @@ public:
     int synth_set_interpolation(int method);
     int synth_play_messages(PackedInt32Array indices, PackedByteArray data);
     int synth_system_reset();
+    void synth_listen_ext_input(bool listen);
     void _input(const Ref<InputEvent> &event) override;
 
 

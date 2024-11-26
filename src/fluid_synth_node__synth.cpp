@@ -394,10 +394,20 @@ int FluidSynthNode::synth_system_reset()
 {
     if (!synth)
     {
-        WARN_PRINT_ED("No synth available to reset");
+        WARN_PRINT_ED("FluidSynth No synth available to reset");
         return -1;
     }
     return fluid_synth_system_reset(synth);
+}
+
+
+void FluidSynthNode::synth_listen_ext_input(bool listen)
+{
+    if (!synth)
+    {
+        WARN_PRINT_ED("FluidSynth No synth available");
+    }
+    set_process_input(listen);
 }
 
 
