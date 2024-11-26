@@ -440,6 +440,8 @@ void FluidSynthNode::_input(const Ref<InputEvent> &event) {
             case MIDI_MESSAGE_PROGRAM_CHANGE:
                 fluid_synth_program_change(synth, channel, midi_event->get_instrument());
                 break;
+            case MIDI_MESSAGE_SYSTEM_RESET:
+                fluid_synth_system_reset(synth);
             default:
                 break;
         }
