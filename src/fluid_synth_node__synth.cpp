@@ -165,14 +165,14 @@ int FluidSynthNode::synth_setup_channel(int channel, int sfont_id, int bank_num,
     }
     
     // Reset all controllers
-    fluid_synth_cc(synth, channel, 121, 0);
+    fluid_synth_cc(synth, channel, MIDI_CC_TYPE_CHMODE_RESET_ALL_CTRLS, 0);
 
     fluid_synth_program_select(synth, channel, sfont_id, bank_num, program);
-    fluid_synth_cc(synth, channel, 91, reverb);
-    fluid_synth_cc(synth, channel, 93, chorus);
-    fluid_synth_cc(synth, channel, 7, volume);
-    fluid_synth_cc(synth, channel, 10, pan);
-    fluid_synth_cc(synth, channel, 11, expression);
+    fluid_synth_cc(synth, channel, MIDI_CC_TYPE_EFX1DEPTH_EXTERNAL_EFX, reverb);
+    fluid_synth_cc(synth, channel, MIDI_CC_TYPE_EFX3DEPTH_CHORUS, chorus);
+    fluid_synth_cc(synth, channel, MIDI_CC_TYPE_CHANNEL_VOLUME, volume);
+    fluid_synth_cc(synth, channel, MIDI_CC_TYPE_PAN, pan);
+    fluid_synth_cc(synth, channel, MIDI_CC_TYPE_EXPRESSION, expression);
 
     return 0;
 }
